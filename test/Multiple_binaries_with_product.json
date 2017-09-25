@@ -1,25 +1,16 @@
 {
   "kind": "Binary",
-  "operator": {
-    "kind": "Operator",
-    "value": "-"
-  },
+  "operator": "-",
   "left": {
     "kind": "Binary",
-    "operator": {
-      "kind": "Operator",
-      "value": "+"
-    },
+    "operator": "+",
     "left": {
       "kind": "Identifier",
       "text": "a"
     },
     "right": {
       "kind": "Binary",
-      "operator": {
-        "kind": "Operator",
-        "value": "*"
-      },
+      "operator": "*",
       "left": {
         "kind": "Identifier",
         "text": "b"
