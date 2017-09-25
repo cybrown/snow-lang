@@ -1,0 +1,37 @@
+{
+  "kind": "Binary",
+  "operator": {
+    "kind": "Operator",
+    "value": "+"
+  },
+  "left": {
+    "kind": "Binary",
+    "operator": {
+      "kind": "Operator",
+      "value": "-"
+    },
+    "left": {
+      "kind": "Binary",
+      "operator": {
+        "kind": "Operator",
+        "value": "+"
+      },
+      "left": {
+        "kind": "Identifier",
+        "text": "a"
+      },
+      "right": {
+        "kind": "Identifier",
+        "text": "b"
+      }
+    },
+    "right": {
+      "kind": "Identifier",
+      "text": "c"
+    }
+  },
+  "right": {
+    "kind": "Identifier",
+    "text": "d"
+  }
+}

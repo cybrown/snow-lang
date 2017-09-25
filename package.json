@@ -1,0 +1,10 @@
+{
+  "name": "lang2",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Cy Brown <cy.brown59@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "parsimmon": "^1.6.2"
+  }
+}

@@ -1,0 +1,23 @@
+# lang2
+
+## Stage 0
+
+Integer 32 bits
+Global variables
+Argument List
+Arithmetic operators
+Function invocation
+
+## Stage 1
+
+Local variables
+Arrays
+Function definition
+
+## Ideas
+
+Function as value
+Float
+String
+Boolean
+Context
