@@ -29,6 +29,7 @@ verify('Multiple_binaries_with_product_and_parenthesis_1', '(a+b)*c-d');
 verify('Multiple_binaries_with_product_and_parenthesis_2', '(a+b)*(c-d)');
 verify('Multiple_binaries_with_product_and_parenthesis_3', ' ( a + b ) * ( c - d ) ');
 verify('If_simple', 'if a { b } else { c }');
+verify('Multiple_expression', 'a ; 1+1; c; d');
 
 console.log(`${parseError} errors, ${mismatch} mismatches, ${created} created, ${total} total`);
 
