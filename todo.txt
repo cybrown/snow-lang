@@ -8,6 +8,7 @@ Argument List
 Arithmetic operators
 Whitespaces
 Function invocation
+Conditions
 
 ## Stage 1
 
@@ -15,6 +16,7 @@ Assign global variables
 Local variables
 Arrays
 Function definition
+Loops
 
 ## Ideas
 

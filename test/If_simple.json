@@ -1,0 +1,15 @@
+{
+  "kind": "If",
+  "condition": {
+    "kind": "Identifier",
+    "text": "a"
+  },
+  "ifTrue": {
+    "kind": "Identifier",
+    "text": "b"
+  },
+  "ifFalse": {
+    "kind": "Identifier",
+    "text": "c"
+  }
+}

@@ -1,8 +1,10 @@
 const fs = require('fs');
 const {parseExpression} = require('./lib/parser');
 
-let errors = 0;
+let parseError = 0;
+let mismatch = 0;
 let total = 0;
+let created = 0;
 
 verify('Number_3', '3');
 verify('Number_34', '34');
@@ -26,16 +28,16 @@ verify('Multiple_binaries_with_product', 'a+b*c-d');
 verify('Multiple_binaries_with_product_and_parenthesis_1', '(a+b)*c-d');
 verify('Multiple_binaries_with_product_and_parenthesis_2', '(a+b)*(c-d)');
 verify('Multiple_binaries_with_product_and_parenthesis_3', ' ( a + b ) * ( c - d ) ');
-//verify('If_simple', 'if a {b}else{c}');
+verify('If_simple', 'if a { b } else { c }');
 
-console.log(`${errors} errors, ${total} total`);
+console.log(`${parseError} errors, ${mismatch} mismatches, ${created} created, ${total} total`);
 
 function verify(name, expr) {
     total++;
     const fileName = `./test/${name}.json`;
     const ast = parseExpression(expr);
     if (ast.status === false) {
-        errors++;
+        parseError++;
         console.log(`ERROR ${name}`)
         console.log(JSON.stringify(ast, null, '  '));
         return;
@@ -43,14 +45,13 @@ function verify(name, expr) {
     const content = JSON.stringify(ast.value, null, '  ');
     if (!fs.existsSync(fileName)) {
         fs.writeFileSync(fileName, content, {encoding: 'UTF-8'});
+        created++;
         console.log(`CREATED ${name}`);
     } else {
         const contentFromFile = fs.readFileSync(fileName, {encoding: 'UTF-8'});
-        if (content === contentFromFile) {
-            console.log(`OK ${name}`);
-        } else {
-            errors++;
-            console.log(`!! ${name}`);
+        if (content !== contentFromFile) {
+            mismatch++;
+            console.log(`MISMATCH ${name}`);
         }
     }
 }
