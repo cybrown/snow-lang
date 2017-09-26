@@ -1,0 +1,8 @@
+{
+  "kind": "Call",
+  "caller": {
+    "kind": "Identifier",
+    "text": "abc"
+  },
+  "args": []
+}

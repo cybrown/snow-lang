@@ -3,13 +3,15 @@
 ## Stage 0
 
 Integer 32 bits
-Global variables
+Read global variables
 Argument List
 Arithmetic operators
+Whitespaces
 Function invocation
 
 ## Stage 1
 
+Assign global variables
 Local variables
 Arrays
 Function definition
