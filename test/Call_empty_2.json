@@ -1,8 +1,13 @@
 {
-  "kind": "Call",
-  "caller": {
-    "kind": "Identifier",
-    "text": "abc"
-  },
-  "args": []
+  "kind": "Program",
+  "expressions": [
+    {
+      "kind": "Call",
+      "caller": {
+        "kind": "Identifier",
+        "text": "abc"
+      },
+      "args": []
+    }
+  ]
 }

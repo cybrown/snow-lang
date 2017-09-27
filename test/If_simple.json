@@ -1,15 +1,20 @@
 {
-  "kind": "If",
-  "condition": {
-    "kind": "Identifier",
-    "text": "a"
-  },
-  "ifTrue": {
-    "kind": "Identifier",
-    "text": "b"
-  },
-  "ifFalse": {
-    "kind": "Identifier",
-    "text": "c"
-  }
+  "kind": "Program",
+  "expressions": [
+    {
+      "kind": "If",
+      "condition": {
+        "kind": "Identifier",
+        "text": "a"
+      },
+      "ifTrue": {
+        "kind": "Identifier",
+        "text": "b"
+      },
+      "ifFalse": {
+        "kind": "Identifier",
+        "text": "c"
+      }
+    }
+  ]
 }

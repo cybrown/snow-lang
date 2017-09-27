@@ -1,4 +1,9 @@
 {
-  "kind": "Number",
-  "value": "345"
+  "kind": "Program",
+  "expressions": [
+    {
+      "kind": "Number",
+      "value": "345"
+    }
+  ]
 }

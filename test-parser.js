@@ -1,5 +1,5 @@
 const fs = require('fs');
-const {parseExpression} = require('./lib/parser');
+const {parseProgram} = require('./lib/parser');
 
 let parseError = 0;
 let mismatch = 0;
@@ -30,13 +30,19 @@ verify('Multiple_binaries_with_product_and_parenthesis_2', '(a+b)*(c-d)');
 verify('Multiple_binaries_with_product_and_parenthesis_3', ' ( a + b ) * ( c - d ) ');
 verify('If_simple', 'if a { b } else { c }');
 verify('Multiple_expression', 'a ; 1+1; c; d');
+verify('Multiple_expression_in_subexpression', '(a ; 1+1; c; d)');
+verify('Multi_expression_program_with_function_definition', `
+    a;
+    fun abc ( a, b ) { toto };
+    b
+`);
 
 console.log(`${parseError} errors, ${mismatch} mismatches, ${created} created, ${total} total`);
 
 function verify(name, expr) {
     total++;
     const fileName = `./test/${name}.json`;
-    const ast = parseExpression(expr);
+    const ast = parseProgram(expr);
     if (ast.status === false) {
         parseError++;
         console.log(`ERROR ${name}`)

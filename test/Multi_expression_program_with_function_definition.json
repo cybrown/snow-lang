@@ -1,0 +1,25 @@
+{
+  "kind": "Program",
+  "expressions": [
+    {
+      "kind": "Identifier",
+      "text": "a"
+    },
+    {
+      "kind": "FunctionDefinition",
+      "name": "abc",
+      "parameters": [
+        "a",
+        "b"
+      ],
+      "body": {
+        "kind": "Identifier",
+        "text": "toto"
+      }
+    },
+    {
+      "kind": "Identifier",
+      "text": "b"
+    }
+  ]
+}

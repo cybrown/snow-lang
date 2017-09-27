@@ -12,11 +12,12 @@ Conditions
 
 ## Stage 1
 
-Assign global variables
-Local variables
-Arrays
 Function definition
+Local variables
+Assign global variables
+Arrays
 Loops
+Block scoped variables
 
 ## Ideas
 
@@ -25,3 +26,5 @@ Float
 String
 Boolean
 Context
+Closures
+Structs

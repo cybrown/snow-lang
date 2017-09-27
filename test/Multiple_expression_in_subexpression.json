@@ -1,0 +1,34 @@
+{
+  "kind": "Program",
+  "expressions": [
+    {
+      "kind": "Expressions",
+      "expressions": [
+        {
+          "kind": "Identifier",
+          "text": "a"
+        },
+        {
+          "kind": "Binary",
+          "operator": "+",
+          "left": {
+            "kind": "Number",
+            "value": "1"
+          },
+          "right": {
+            "kind": "Number",
+            "value": "1"
+          }
+        },
+        {
+          "kind": "Identifier",
+          "text": "c"
+        },
+        {
+          "kind": "Identifier",
+          "text": "d"
+        }
+      ]
+    }
+  ]
+}

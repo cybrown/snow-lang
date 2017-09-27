@@ -1,13 +1,18 @@
 {
-  "kind": "Call",
-  "caller": {
-    "kind": "Identifier",
-    "text": "a"
-  },
-  "args": [
+  "kind": "Program",
+  "expressions": [
     {
-      "kind": "Number",
-      "value": "3"
+      "kind": "Call",
+      "caller": {
+        "kind": "Identifier",
+        "text": "a"
+      },
+      "args": [
+        {
+          "kind": "Number",
+          "value": "3"
+        }
+      ]
     }
   ]
 }

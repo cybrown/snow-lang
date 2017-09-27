@@ -1,4 +1,9 @@
 {
-  "kind": "Identifier",
-  "text": "abcd"
+  "kind": "Program",
+  "expressions": [
+    {
+      "kind": "Identifier",
+      "text": "abcd"
+    }
+  ]
 }

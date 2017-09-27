@@ -1,28 +1,33 @@
 {
-  "kind": "Binary",
-  "operator": "-",
-  "left": {
-    "kind": "Binary",
-    "operator": "*",
-    "left": {
+  "kind": "Program",
+  "expressions": [
+    {
       "kind": "Binary",
-      "operator": "+",
+      "operator": "-",
       "left": {
-        "kind": "Identifier",
-        "text": "a"
+        "kind": "Binary",
+        "operator": "*",
+        "left": {
+          "kind": "Binary",
+          "operator": "+",
+          "left": {
+            "kind": "Identifier",
+            "text": "a"
+          },
+          "right": {
+            "kind": "Identifier",
+            "text": "b"
+          }
+        },
+        "right": {
+          "kind": "Identifier",
+          "text": "c"
+        }
       },
       "right": {
         "kind": "Identifier",
-        "text": "b"
+        "text": "d"
       }
-    },
-    "right": {
-      "kind": "Identifier",
-      "text": "c"
     }
-  },
-  "right": {
-    "kind": "Identifier",
-    "text": "d"
-  }
+  ]
 }
