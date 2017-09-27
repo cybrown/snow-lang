@@ -23,3 +23,9 @@ assert.equal(42, eval(`
     };
     addOne(41)
 `));
+assert.equal(720, eval(`
+    fun fact(a) {
+        if (a) {a * fact(a - 1)} else {1}
+    };
+    fact(6)
+`));
