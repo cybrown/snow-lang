@@ -1,21 +1,19 @@
-const {parseExpression} = require('./lib/parser');
+const {parseExpression, parseProgram} = require('./lib/parser');
 const {compileAst} = require('./lib/compile');
 const {run} = require('./lib/run');
+const {dumpOpcodes} = require('./lib/util');
 
-/*
-const ast = parseExpression('if 1 {2} else {3}');
-
-//console.log(JSON.stringify(ast, null, '  '));
+const ast = parseProgram(`
+    fun abc() {
+        4+5
+    };
+    abc();
+    3
+`);
 
 const bc = compileAst(ast);
 
-//console.log(JSON.stringify(bc, null, '  '));
+//dumpOpcodes(bc);
 
-
-const result = run(bc);
-
+const result = run(bc, {a: 1});
 console.log(result);
-*/
-
-const ast = parseExpression('a; b');
-console.log(JSON.stringify(ast, null, '  '));

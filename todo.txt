@@ -13,6 +13,7 @@ Conditions
 ## Stage 1
 
 Function definition
+Arguments
 Local variables
 Assign global variables
 Arrays
