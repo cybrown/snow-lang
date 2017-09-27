@@ -4,16 +4,15 @@ const {run} = require('./lib/run');
 const {dumpOpcodes} = require('./lib/util');
 
 const ast = parseProgram(`
-    fun abc() {
-        4+5
+    fun addOne(a) {
+        a+1
     };
-    abc();
-    3
+    addOne(41)
 `);
 
 const bc = compileAst(ast);
 
-//dumpOpcodes(bc);
+dumpOpcodes(bc);
 
-const result = run(bc, {a: 1});
+const result = run(bc);
 console.log(result);

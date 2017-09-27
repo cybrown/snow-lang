@@ -17,3 +17,9 @@ assert.equal(9, eval(`
     };
     abc()
 `));
+assert.equal(42, eval(`
+    fun addOne(a) {
+        a+1
+    };
+    addOne(41)
+`));
