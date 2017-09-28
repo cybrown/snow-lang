@@ -37,3 +37,13 @@ assert.equal(10, eval(`
     };
     abc(5)
 `));
+assert.equal(11, eval(`
+    fun abc(bfg) {
+        var a;
+        a = 6;
+        var b;
+        b = bfg + a;
+        b
+    };
+    abc(5)
+`));

@@ -16,10 +16,22 @@ Function definition
 Arguments
 Assign global variables
 Assign parameters
-
 Declare local variables
 Read local variable
 Assign local variable
+
+Import other file
+
+## Stage 2
+
+Desugarizer
+Native operation
+Custom operators
+Custom clauses
+Initial standard library
+
+## Stage 3
+
 Loops
 Arrays
 Break loop

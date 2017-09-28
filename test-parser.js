@@ -44,6 +44,16 @@ verify('Assignement_parameter', `
     };
     abc(5)
 `);
+verify('Local_variables', `
+    fun abc(bfg) {
+        var a;
+        a = 6;
+        var b;
+        b = bfg + a;
+        b
+    };
+    abc(5)
+`);
 
 console.log(`${parseError} errors, ${mismatch} mismatches, ${created} created, ${total} total`);
 

@@ -5,8 +5,11 @@ const {dumpOpcodes} = require('./lib/util');
 
 const ast = parseProgram(`
     fun abc(bfg) {
-        bfg = bfg + 5;
-        bfg
+        var a;
+        a = 6;
+        var b;
+        b = bfg + a;
+        b
     };
     abc(5)
 `);
