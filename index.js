@@ -1,5 +1,6 @@
 const {parseExpression, parseProgram} = require('./lib/parser');
 const {compileAst} = require('./lib/compile');
+const {desugarize} = require('./lib/desugarizer');
 const {run} = require('./lib/run');
 const {dumpOpcodes} = require('./lib/util');
 
@@ -16,7 +17,11 @@ const ast = parseProgram(`
 
 console.log(JSON.stringify(ast, null, '  '))
 
-const bc = compileAst(ast);
+const desugarizedAst = desugarize(ast);
+
+console.log(JSON.stringify(desugarizedAst, null, '  '))
+
+const bc = compileAst(desugarizedAst);
 
 dumpOpcodes(bc);
 

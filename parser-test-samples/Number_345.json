@@ -1,5 +1,5 @@
 {
-  "kind": "Program",
+  "kind": "ProgramWithExpressions",
   "expressions": [
     {
       "kind": "Number",

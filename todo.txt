@@ -20,11 +20,11 @@ Declare local variables
 Read local variable
 Assign local variable
 
+Desugarizer
 Import other file
 
 ## Stage 2
 
-Desugarizer
 Native operation
 Custom operators
 Custom clauses
