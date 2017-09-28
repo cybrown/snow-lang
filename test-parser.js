@@ -36,6 +36,14 @@ verify('Multi_expression_program_with_function_definition', `
     fun abc ( a, b ) { toto };
     b
 `);
+verify('Assignement_global', `a = a + 5; a`);
+verify('Assignement_parameter', `
+    fun abc(bfg) {
+        bfg = bfg + 5;
+        bfg
+    };
+    abc(5)
+`);
 
 console.log(`${parseError} errors, ${mismatch} mismatches, ${created} created, ${total} total`);
 

@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Cy Brown <cy.brown59@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "node test-parser.js && node test-eval.js"
+  },
   "dependencies": {
     "parsimmon": "^1.6.2"
   }

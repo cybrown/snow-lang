@@ -29,3 +29,11 @@ assert.equal(720, eval(`
     };
     fact(6)
 `));
+assert.equal(6, eval(`a = a + 5; a`, {a: 1}));
+assert.equal(10, eval(`
+    fun abc(bfg) {
+        bfg = bfg + 5;
+        bfg
+    };
+    abc(5)
+`));

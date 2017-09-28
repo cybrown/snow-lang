@@ -1,0 +1,54 @@
+{
+  "kind": "Program",
+  "expressions": [
+    {
+      "kind": "FunctionDefinition",
+      "name": "abc",
+      "parameters": [
+        "bfg"
+      ],
+      "body": {
+        "kind": "Expressions",
+        "expressions": [
+          {
+            "kind": "Assignement",
+            "operator": "=",
+            "left": {
+              "kind": "Identifier",
+              "text": "bfg"
+            },
+            "right": {
+              "kind": "Binary",
+              "operator": "+",
+              "left": {
+                "kind": "Identifier",
+                "text": "bfg"
+              },
+              "right": {
+                "kind": "Number",
+                "value": "5"
+              }
+            }
+          },
+          {
+            "kind": "Identifier",
+            "text": "bfg"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "Call",
+      "caller": {
+        "kind": "Identifier",
+        "text": "abc"
+      },
+      "args": [
+        {
+          "kind": "Number",
+          "value": "5"
+        }
+      ]
+    }
+  ]
+}

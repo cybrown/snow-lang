@@ -14,14 +14,20 @@ Conditions
 
 Function definition
 Arguments
-Local variables
 Assign global variables
-Arrays
+Assign parameters
+
+Declare local variables
+Read local variable
+Assign local variable
 Loops
-Block scoped variables
+Arrays
+Break loop
+Continue loop
 
 ## Ideas
 
+Block scoped variables
 Function as value
 Float
 String
