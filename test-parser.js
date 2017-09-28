@@ -59,7 +59,7 @@ console.log(`${parseError} errors, ${mismatch} mismatches, ${created} created, $
 
 function verify(name, expr) {
     total++;
-    const fileName = `./test/${name}.json`;
+    const fileName = `./parser-test-samples/${name}.json`;
     const ast = parseProgram(expr);
     if (ast.status === false) {
         parseError++;
