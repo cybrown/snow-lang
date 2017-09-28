@@ -1,4 +1,5 @@
 const fs = require('fs');
+const yaml = require('js-yaml');
 const {parseProgram} = require('./lib/parser');
 
 let parseError = 0;
@@ -59,15 +60,15 @@ console.log(`${parseError} errors, ${mismatch} mismatches, ${created} created, $
 
 function verify(name, expr) {
     total++;
-    const fileName = `./parser-test-samples/${name}.json`;
+    const fileName = `./parser-test-samples/${name}.yml`;
     const ast = parseProgram(expr);
     if (ast.status === false) {
         parseError++;
         console.log(`ERROR ${name}`)
-        console.log(JSON.stringify(ast, null, '  '));
+        console.log(yaml.dump(ast));
         return;
     }
-    const content = JSON.stringify(ast.value, null, '  ');
+    const content = yaml.dump(ast.value);
     if (!fs.existsSync(fileName)) {
         fs.writeFileSync(fileName, content, {encoding: 'UTF-8'});
         created++;

@@ -1,0 +1,9 @@
+kind: ProgramWithExpressions
+expressions:
+  - kind: Call
+    caller:
+      kind: Identifier
+      text: a
+    args:
+      - kind: Number
+        value: '3'

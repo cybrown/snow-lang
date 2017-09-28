@@ -1,9 +1,0 @@
-{
-  "kind": "ProgramWithExpressions",
-  "expressions": [
-    {
-      "kind": "Number",
-      "value": "34"
-    }
-  ]
-}

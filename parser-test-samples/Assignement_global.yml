@@ -1,0 +1,18 @@
+kind: ProgramWithExpressions
+expressions:
+  - kind: Assignement
+    operator: =
+    left:
+      kind: Identifier
+      text: a
+    right:
+      kind: Binary
+      operator: +
+      left:
+        kind: Identifier
+        text: a
+      right:
+        kind: Number
+        value: '5'
+  - kind: Identifier
+    text: a

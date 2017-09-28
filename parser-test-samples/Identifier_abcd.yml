@@ -1,0 +1,4 @@
+kind: ProgramWithExpressions
+expressions:
+  - kind: Identifier
+    text: abcd

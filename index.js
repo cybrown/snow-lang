@@ -1,3 +1,5 @@
+const yaml = require('js-yaml');
+
 const {parseExpression, parseProgram} = require('./lib/parser');
 const {compileAst} = require('./lib/compile');
 const {desugarize} = require('./lib/desugarizer');
@@ -15,11 +17,11 @@ const ast = parseProgram(`
     abc(5)
 `);
 
-console.log(JSON.stringify(ast, null, '  '))
+console.log(yaml.dump(ast))
 
 const desugarizedAst = desugarize(ast);
 
-console.log(JSON.stringify(desugarizedAst, null, '  '))
+console.log(yaml.dump(desugarizedAst))
 
 const bc = compileAst(desugarizedAst);
 
