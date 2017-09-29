@@ -1,0 +1,41 @@
+value:
+  kind: Program
+  functions:
+    - kind: FunctionDefinition
+      name: abc
+      parameters:
+        - bfg
+      body:
+        kind: Expressions
+        expressions:
+          - kind: Assignement
+            operator: =
+            left:
+              kind: Identifier
+              text: bfg
+            right:
+              kind: Binary
+              operator: +
+              left:
+                kind: Identifier
+                text: bfg
+              right:
+                kind: Number
+                value: '5'
+          - kind: Identifier
+            text: bfg
+      locals: []
+    - kind: FunctionDefinition
+      name: _main
+      parameters: []
+      body:
+        kind: Expressions
+        expressions:
+          - kind: Call
+            caller:
+              kind: Identifier
+              text: abc
+            args:
+              - kind: Number
+                value: '5'
+      locals: []

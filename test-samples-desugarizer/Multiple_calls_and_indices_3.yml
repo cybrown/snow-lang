@@ -1,0 +1,32 @@
+value:
+  kind: Program
+  functions:
+    - kind: FunctionDefinition
+      name: _main
+      parameters: []
+      body:
+        kind: Expressions
+        expressions:
+          - kind: Call
+            caller:
+              kind: Index
+              expression:
+                kind: Call
+                caller:
+                  kind: Index
+                  expression:
+                    kind: Identifier
+                    text: a
+                  index:
+                    - kind: Identifier
+                      text: b
+                args:
+                  - kind: Identifier
+                    text: c
+              index:
+                - kind: Identifier
+                  text: d
+            args:
+              - kind: Identifier
+                text: e
+      locals: []

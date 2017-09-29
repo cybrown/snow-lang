@@ -5,7 +5,7 @@
   "author": "Cy Brown <cy.brown59@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "node test-parser.js && node test-eval.js"
+    "test": "node test-parser.js && node test-desugarizer.js && node test-eval.js"
   },
   "dependencies": {
     "js-yaml": "^3.10.0",

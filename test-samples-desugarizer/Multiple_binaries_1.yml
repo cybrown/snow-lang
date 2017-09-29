@@ -1,0 +1,30 @@
+value:
+  kind: Program
+  functions:
+    - kind: FunctionDefinition
+      name: _main
+      parameters: []
+      body:
+        kind: Expressions
+        expressions:
+          - kind: Binary
+            operator: +
+            left:
+              kind: Binary
+              operator: '-'
+              left:
+                kind: Binary
+                operator: +
+                left:
+                  kind: Identifier
+                  text: a
+                right:
+                  kind: Identifier
+                  text: b
+              right:
+                kind: Identifier
+                text: c
+            right:
+              kind: Identifier
+              text: d
+      locals: []
