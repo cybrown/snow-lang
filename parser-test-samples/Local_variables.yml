@@ -5,7 +5,7 @@ expressions:
     parameters:
       - bfg
     body:
-      kind: Expressions
+      kind: ExpressionsAndVarDeclarations
       expressions:
         - kind: VarDeclaration
           name: a

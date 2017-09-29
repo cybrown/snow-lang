@@ -1,6 +1,6 @@
 kind: ProgramWithExpressions
 expressions:
-  - kind: Expressions
+  - kind: ExpressionsAndVarDeclarations
     expressions:
       - kind: Identifier
         text: a
