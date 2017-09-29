@@ -60,7 +60,7 @@ console.log(`${parseError} errors, ${mismatch} mismatches, ${created} created, $
 
 function verify(name, expr) {
     total++;
-    const fileName = `./parser-test-samples/${name}.yml`;
+    const fileName = `./test-samples-parser/${name}.yml`;
     const ast = parseProgram(expr);
     if (ast.status === false) {
         parseError++;

@@ -2,10 +2,10 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 const {desugarize} = require('./lib/desugarizer');
 
-const files = fs.readdirSync('./parser-test-samples');
+const files = fs.readdirSync('./test-samples-parser');
 
 files.forEach(fileName => {
-    const path = `./parser-test-samples/${fileName}`;
+    const path = `./test-samples-parser/${fileName}`;
     const rawAst = {value: yaml.load(fs.readFileSync(path))};
     const actual = yaml.dump(desugarize(rawAst));
 
