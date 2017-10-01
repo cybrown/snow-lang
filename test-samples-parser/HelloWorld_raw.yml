@@ -1,0 +1,77 @@
+kind: ProgramWithExpressions
+expressions:
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '72'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '101'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '108'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '108'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '111'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '44'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '32'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '119'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '111'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '114'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '108'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '100'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '32'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '33'
+  - kind: NativeOperation
+    operation: PUTCHAR
+    arguments:
+      - kind: Number
+        value: '10'

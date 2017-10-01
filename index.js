@@ -7,7 +7,21 @@ const {run} = require('./lib/run');
 const {dumpOpcodes} = require('./lib/util');
 
 const ast = parseProgram(`
-    #ADD(1, 2)
+    #PUTCHAR(72);
+    #PUTCHAR(101);
+    #PUTCHAR(108);
+    #PUTCHAR(108);
+    #PUTCHAR(111);
+    #PUTCHAR(44);
+    #PUTCHAR(32);
+    #PUTCHAR(119);
+    #PUTCHAR(111);
+    #PUTCHAR(114);
+    #PUTCHAR(108);
+    #PUTCHAR(100);
+    #PUTCHAR(32);
+    #PUTCHAR(33);
+    #PUTCHAR(10)
 `);
 
 console.log(yaml.dump(ast))
