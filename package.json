@@ -1,14 +1,19 @@
 {
-  "name": "lang2",
+  "name": "@cybwn/snow-lang",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "./bin/snow-run.js",
   "author": "Cy Brown <cy.brown59@gmail.com>",
   "license": "MIT",
   "scripts": {
     "test": "node test-parser.js && node test-desugarizer.js && node test-compiler.js && node test-eval.js"
   },
+  "bin": {
+    "snow-run": "./bin/snow-run.js"
+  },
   "dependencies": {
-    "js-yaml": "^3.10.0",
     "parsimmon": "^1.6.2"
+  },
+  "devDependencies": {
+    "js-yaml": "^3.10.0"
   }
 }
