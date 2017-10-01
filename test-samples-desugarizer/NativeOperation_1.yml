@@ -1,0 +1,22 @@
+value:
+  kind: Program
+  functions:
+    - kind: FunctionDefinition
+      name: _main
+      parameters: []
+      body:
+        kind: Expressions
+        expressions:
+          - kind: NativeOperation
+            operation: ADD
+            arguments:
+              - kind: Number
+                value: '2'
+              - kind: NativeOperation
+                operation: MUL
+                arguments:
+                  - kind: Number
+                    value: '4'
+                  - kind: Number
+                    value: '8'
+      locals: []

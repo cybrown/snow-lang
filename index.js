@@ -7,14 +7,7 @@ const {run} = require('./lib/run');
 const {dumpOpcodes} = require('./lib/util');
 
 const ast = parseProgram(`
-    fun abc(bfg) {
-        var a;
-        a = 6;
-        var b;
-        b = bfg + a;
-        b
-    };
-    abc(5)
+    #ADD(1, 2)
 `);
 
 console.log(yaml.dump(ast))
@@ -27,7 +20,5 @@ const bc = compileAst(desugarizedAst);
 
 dumpOpcodes(bc);
 
-const result = run(bc, {
-    a: 4
-});
+const result = run(bc);
 console.log(result);

@@ -55,6 +55,7 @@ verify(11, `
     };
     abc(5)
 `);
+verify(34, '#ADD(2, #MUL(4, 8))');
 
 function verify(actual, expr, globals) {
     total++;

@@ -19,15 +19,15 @@ Assign parameters
 Declare local variables
 Read local variable
 Assign local variable
-
 Desugarizer
-Import other file
 
 ## Stage 2
 
 Native operation
+
 Custom operators
 Custom clauses
+Import other file
 Initial standard library
 
 ## Stage 3

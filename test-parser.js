@@ -55,6 +55,7 @@ verify('Local_variables', `
     };
     abc(5)
 `);
+verify('NativeOperation_1', '#ADD(2, #MUL(4, 8))');
 
 console.log(`Parser test report: ${parseError} errors, ${mismatch} mismatches, ${created} created, ${total} total`);
 
