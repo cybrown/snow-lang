@@ -1,5 +1,4 @@
-Put all out of function expressions inside a function
-    COMPILER
+# TODO
 
 Extract local variables
     COMPILER
@@ -7,8 +6,14 @@ Extract local variables
 Create specific operations for local variables and arguments
     VM, COMPILER
 
-Put final returns
-
 Extract internal function definition
 
 Replace global variables by closure scopes
+
+
+# DONE
+
+Put all out of function expressions inside a function
+    COMPILER
+
+Put final returns
