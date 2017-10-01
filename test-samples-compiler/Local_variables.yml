@@ -24,22 +24,22 @@ abc:
       - kind: CONST
         args:
           - '6'
-      - kind: STORE
+      - kind: STACK_STORE
         args:
           - a
       - kind: POP
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - bfg
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - a
       - kind: ADD
-      - kind: STORE
+      - kind: STACK_STORE
         args:
           - b
       - kind: POP
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - b
       - kind: RETURN

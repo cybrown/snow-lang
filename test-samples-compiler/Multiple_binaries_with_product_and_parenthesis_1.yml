@@ -4,18 +4,18 @@ _main:
   locals: {}
   blocks:
     _main:
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - a
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - b
       - kind: ADD
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - c
       - kind: MUL
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - d
       - kind: SUB

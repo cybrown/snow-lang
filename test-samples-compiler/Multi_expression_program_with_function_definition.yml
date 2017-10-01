@@ -4,11 +4,11 @@ _main:
   locals: {}
   blocks:
     _main:
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - a
       - kind: POP
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - b
       - kind: RETURN
@@ -20,7 +20,7 @@ abc:
   locals: {}
   blocks:
     _main:
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - toto
       - kind: RETURN

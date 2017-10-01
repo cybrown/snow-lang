@@ -4,7 +4,7 @@ _main:
   locals: {}
   blocks:
     _main:
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - a
       - kind: RETURN

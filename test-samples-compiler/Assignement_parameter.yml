@@ -19,18 +19,18 @@ abc:
   locals: {}
   blocks:
     _main:
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - bfg
       - kind: CONST
         args:
           - '5'
       - kind: ADD
-      - kind: STORE
+      - kind: STACK_STORE
         args:
           - bfg
       - kind: POP
-      - kind: LOAD
+      - kind: STACK_LOAD
         args:
           - bfg
       - kind: RETURN
