@@ -1,0 +1,14 @@
+kind: ProgramWithExpressions
+expressions:
+  - kind: VarDeclaration
+    name: a
+  - kind: Assignement
+    operator: =
+    left:
+      kind: Identifier
+      text: a
+    right:
+      kind: Number
+      value: '42'
+  - kind: Identifier
+    text: a

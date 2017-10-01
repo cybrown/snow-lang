@@ -55,6 +55,15 @@ verify(11, `
     };
     abc(5)
 `);
+verify(11, `
+    var bfg;
+    bfg = 5;
+    var a;
+    a = 6;
+    var b;
+    b = bfg + a;
+    b
+`);
 verify(34, '#ADD(2, #MUL(4, 8))');
 
 function verify(actual, expr, globals) {

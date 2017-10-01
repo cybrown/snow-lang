@@ -1,0 +1,18 @@
+_main:
+  ifId: 0
+  parameters: []
+  locals:
+    a: true
+  blocks:
+    _main:
+      - kind: CONST
+        args:
+          - '42'
+      - kind: STORE
+        args:
+          - a
+      - kind: POP
+      - kind: LOAD
+        args:
+          - a
+      - kind: RETURN
