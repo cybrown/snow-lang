@@ -1,0 +1,17 @@
+_main:
+  ifId: 0
+  parameters: []
+  locals: {}
+  blocks:
+    _main:
+      - kind: LOAD
+        args:
+          - b
+      - kind: LOAD
+        args:
+          - c
+      - kind: CALL
+        args:
+          - a
+          - 2
+      - kind: RETURN

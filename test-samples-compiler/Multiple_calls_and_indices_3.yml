@@ -1,0 +1,14 @@
+_main:
+  ifId: 0
+  parameters: []
+  locals: {}
+  blocks:
+    _main:
+      - kind: LOAD
+        args:
+          - e
+      - kind: CALL
+        args:
+          - !<tag:yaml.org,2002:js/undefined> ''
+          - 1
+      - kind: RETURN

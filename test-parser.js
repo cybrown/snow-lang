@@ -56,7 +56,7 @@ verify('Local_variables', `
     abc(5)
 `);
 
-console.log(`${parseError} errors, ${mismatch} mismatches, ${created} created, ${total} total`);
+console.log(`Parser test report: ${parseError} errors, ${mismatch} mismatches, ${created} created, ${total} total`);
 
 function verify(name, expr) {
     total++;

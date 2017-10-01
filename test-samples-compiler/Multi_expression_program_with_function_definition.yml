@@ -1,0 +1,26 @@
+_main:
+  ifId: 0
+  parameters: []
+  locals: {}
+  blocks:
+    _main:
+      - kind: LOAD
+        args:
+          - a
+      - kind: POP
+      - kind: LOAD
+        args:
+          - b
+      - kind: RETURN
+abc:
+  ifId: 0
+  parameters:
+    - a
+    - b
+  locals: {}
+  blocks:
+    _main:
+      - kind: LOAD
+        args:
+          - toto
+      - kind: RETURN

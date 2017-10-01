@@ -1,0 +1,36 @@
+_main:
+  ifId: 0
+  parameters: []
+  locals: {}
+  blocks:
+    _main:
+      - kind: CONST
+        args:
+          - '5'
+      - kind: CALL
+        args:
+          - abc
+          - 1
+      - kind: RETURN
+abc:
+  ifId: 0
+  parameters:
+    - bfg
+  locals: {}
+  blocks:
+    _main:
+      - kind: LOAD
+        args:
+          - bfg
+      - kind: CONST
+        args:
+          - '5'
+      - kind: ADD
+      - kind: STORE
+        args:
+          - bfg
+      - kind: POP
+      - kind: LOAD
+        args:
+          - bfg
+      - kind: RETURN

@@ -1,0 +1,10 @@
+_main:
+  ifId: 0
+  parameters: []
+  locals: {}
+  blocks:
+    _main:
+      - kind: CONST
+        args:
+          - '3.14'
+      - kind: RETURN

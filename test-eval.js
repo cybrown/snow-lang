@@ -1,29 +1,33 @@
 const assert = require('assert');
 const {eval} = require('./lib/run');
 
-assert.equal(3, eval('1+2'));
-assert.equal(40, eval('abc-2', {abc: 42}));
-assert.equal(4, eval('if 1 {a} else {b}', {a: 4}));
-assert.equal(3, eval(`
+let mismatch = 0;
+let total = 0;
+let created = 0;
+
+verify(3, '1+2');
+verify(40, 'abc-2', {abc: 42});
+verify(4, 'if 1 {a} else {b}', {a: 4});
+verify(3, `
     fun abc() {
         4+5
     };
     abc();
     3
-`));
-assert.equal(9, eval(`
+`);
+verify(9, `
     fun abc() {
         4+5
     };
     abc()
-`));
-assert.equal(42, eval(`
+`);
+verify(42, `
     fun addOne(a) {
         a+1
     };
     addOne(41)
-`));
-assert.equal(720, eval(`
+`);
+verify(720, `
     fun fact(a) {
         if (a) {
             a * fact(a - 1)
@@ -32,16 +36,16 @@ assert.equal(720, eval(`
         }
     };
     fact(6)
-`));
-assert.equal(6, eval(`a = a + 5; a`, {a: 1}));
-assert.equal(10, eval(`
+`);
+verify(6, `a = a + 5; a`, {a: 1});
+verify(10, `
     fun abc(bfg) {
         bfg = bfg + 5;
         bfg
     };
     abc(5)
-`));
-assert.equal(11, eval(`
+`);
+verify(11, `
     fun abc(bfg) {
         var a;
         a = 6;
@@ -50,4 +54,18 @@ assert.equal(11, eval(`
         b
     };
     abc(5)
-`));
+`);
+
+function verify(actual, expr, globals) {
+    total++;
+    try {
+        assert.equal(actual, eval(expr, globals));
+    } catch (err) {
+        if (err) {
+            console.log('MISMATCH:', err.message);
+        }
+        mismatch++;
+    }
+}
+
+console.log(`Eval test report: ${mismatch} mismatches, ${total} total`);

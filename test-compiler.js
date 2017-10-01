@@ -1,20 +1,20 @@
 const fs = require('fs');
 const yaml = require('js-yaml');
-const {desugarize} = require('./lib/desugarizer');
+const {compileAst} = require('./lib/compile');
 
 let mismatch = 0;
 let total = 0;
 let created = 0;
 
-const files = fs.readdirSync('./test-samples-parser');
+const files = fs.readdirSync('./test-samples-desugarizer');
 
 files.forEach(fileName => {
     total++;
-    const path = `./test-samples-parser/${fileName}`;
-    const rawAst = {value: yaml.load(fs.readFileSync(path))};
-    const actual = yaml.dump(desugarize(rawAst));
+    const path = `./test-samples-desugarizer/${fileName}`;
+    const ast = yaml.load(fs.readFileSync(path));
+    const actual = yaml.dump(compileAst(ast));
 
-    const expectedPath = `./test-samples-desugarizer/${fileName}`;
+    const expectedPath = `./test-samples-compiler/${fileName}`;
 
     if (fs.existsSync(expectedPath)) {
         const expected = fs.readFileSync(expectedPath, {encoding: 'UTF-8'});
@@ -29,4 +29,4 @@ files.forEach(fileName => {
     }
 });
 
-console.log(`Desugarizer test report: ${mismatch} mismatches, ${created} created, ${total} total`);
+console.log(`Compiler test report: ${mismatch} mismatches, ${created} created, ${total} total`);
