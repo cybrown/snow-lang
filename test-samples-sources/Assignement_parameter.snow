@@ -1,0 +1,5 @@
+fun abc(bfg) {
+    bfg = bfg + 5;
+    bfg
+};
+abc(5)
