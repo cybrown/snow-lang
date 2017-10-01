@@ -1,0 +1,12 @@
+value:
+  kind: Program
+  functions:
+    - kind: FunctionDefinition
+      name: _main
+      parameters: []
+      body:
+        kind: Expressions
+        expressions:
+          - kind: Identifier
+            text: abcd_efgh_IJkl
+      locals: []

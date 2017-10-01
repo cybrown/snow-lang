@@ -1,0 +1,10 @@
+_main:
+  ifId: 0
+  parameters: []
+  locals: {}
+  blocks:
+    _main:
+      - kind: LOAD
+        args:
+          - abcd_efgh_IJkl
+      - kind: RETURN
