@@ -1,0 +1,5 @@
+fun print(str) {
+    #PUTS(str + 1, #LOAD(str))
+};
+
+print("Hello, world !\n")

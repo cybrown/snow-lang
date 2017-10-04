@@ -1,0 +1,71 @@
+value:
+  kind: Program
+  functions:
+    - kind: FunctionDefinition
+      name: print
+      parameters:
+        - str
+      body:
+        kind: NativeOperation
+        operation: PUTS
+        arguments:
+          - kind: Binary
+            operator: +
+            left:
+              kind: Identifier
+              text: str
+            right:
+              kind: Number
+              value: '1'
+          - kind: NativeOperation
+            operation: LOAD
+            arguments:
+              - kind: Identifier
+                text: str
+      locals: []
+    - kind: FunctionDefinition
+      name: _main
+      parameters: []
+      body:
+        kind: Expressions
+        expressions:
+          - kind: Call
+            caller:
+              kind: Identifier
+              text: print
+            args:
+              - kind: ArrayLiteral
+                values:
+                  - kind: Number
+                    value: '15'
+                  - kind: Number
+                    value: '72'
+                  - kind: Number
+                    value: '101'
+                  - kind: Number
+                    value: '108'
+                  - kind: Number
+                    value: '108'
+                  - kind: Number
+                    value: '111'
+                  - kind: Number
+                    value: '44'
+                  - kind: Number
+                    value: '32'
+                  - kind: Number
+                    value: '119'
+                  - kind: Number
+                    value: '111'
+                  - kind: Number
+                    value: '114'
+                  - kind: Number
+                    value: '108'
+                  - kind: Number
+                    value: '100'
+                  - kind: Number
+                    value: '32'
+                  - kind: Number
+                    value: '33'
+                  - kind: Number
+                    value: '10'
+      locals: []

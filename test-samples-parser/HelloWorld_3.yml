@@ -1,0 +1,31 @@
+kind: ProgramWithExpressions
+expressions:
+  - kind: FunctionDefinition
+    name: print
+    parameters:
+      - str
+    body:
+      kind: NativeOperation
+      operation: PUTS
+      arguments:
+        - kind: Binary
+          operator: +
+          left:
+            kind: Identifier
+            text: str
+          right:
+            kind: Number
+            value: '1'
+        - kind: NativeOperation
+          operation: LOAD
+          arguments:
+            - kind: Identifier
+              text: str
+  - kind: Call
+    caller:
+      kind: Identifier
+      text: print
+    args:
+      - kind: StringLiteral
+        text: |
+          Hello, world !

@@ -7,7 +7,11 @@ const {run} = require('./lib/run');
 const {dumpOpcodes} = require('./lib/util');
 
 const ast = parseProgram(`
-    #PUTS([72, 101, 108, 108, 111, 44, 32, 119, 111, 114, 108, 100, 32, 33, 10], 15)
+    fun print(str) {
+        #PUTS(str + 1, #LOAD(str))
+    };
+
+    print("Hello, world !\\n")
 `);
 
 console.log(yaml.dump(ast))
