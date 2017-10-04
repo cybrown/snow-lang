@@ -12,7 +12,10 @@ files.forEach(fileName => {
     total++;
     const path = `./test-samples-desugarizer/${fileName}`;
     const ast = yaml.load(fs.readFileSync(path));
-    const actual = yaml.dump(compileAst(ast));
+    const opcodes = compileAst(ast, 64);
+    const actual = yaml.dump(Object.assign({}, opcodes, {
+        memory: Buffer.from(opcodes.memory).toString('hex')
+    }));
 
     const expectedPath = `./test-samples-compiler/${fileName}`;
 

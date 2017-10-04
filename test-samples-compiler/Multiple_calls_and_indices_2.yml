@@ -1,14 +1,17 @@
-_main:
-  ifId: 0
-  parameters: []
-  locals: {}
-  blocks:
-    _main:
-      - kind: STACK_LOAD
-        args:
-          - e
-      - kind: CALL
-        args:
-          - !<tag:yaml.org,2002:js/undefined> ''
-          - 1
-      - kind: RETURN
+functions:
+  _main:
+    ifId: 0
+    parameters: []
+    locals: {}
+    blocks:
+      _main:
+        - kind: STACK_LOAD
+          args:
+            - e
+        - kind: CALL
+          args:
+            - !<tag:yaml.org,2002:js/undefined> ''
+            - 1
+        - kind: RETURN
+memory: >-
+  00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

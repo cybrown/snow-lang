@@ -1,29 +1,32 @@
-_main:
-  ifId: 1
-  parameters: []
-  locals: {}
-  blocks:
-    _main:
-      - kind: STACK_LOAD
-        args:
-          - a
-      - kind: BRANCH_COND
-        args:
-          - ifTrue-0
-          - ifFalse-0
-    ifTrue-0:
-      - kind: STACK_LOAD
-        args:
-          - b
-      - kind: BRANCH
-        args:
-          - ifEnd-0
-    ifFalse-0:
-      - kind: STACK_LOAD
-        args:
-          - c
-      - kind: BRANCH
-        args:
-          - ifEnd-0
-    ifEnd-0:
-      - kind: RETURN
+functions:
+  _main:
+    ifId: 1
+    parameters: []
+    locals: {}
+    blocks:
+      _main:
+        - kind: STACK_LOAD
+          args:
+            - a
+        - kind: BRANCH_COND
+          args:
+            - ifTrue-0
+            - ifFalse-0
+      ifTrue-0:
+        - kind: STACK_LOAD
+          args:
+            - b
+        - kind: BRANCH
+          args:
+            - ifEnd-0
+      ifFalse-0:
+        - kind: STACK_LOAD
+          args:
+            - c
+        - kind: BRANCH
+          args:
+            - ifEnd-0
+      ifEnd-0:
+        - kind: RETURN
+memory: >-
+  00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

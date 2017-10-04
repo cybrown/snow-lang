@@ -1,81 +1,84 @@
-_main:
-  ifId: 0
-  parameters: []
-  locals: {}
-  blocks:
-    _main:
-      - kind: CONST
-        args:
-          - '72'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '101'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '108'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '108'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '111'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '44'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '32'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '119'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '111'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '114'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '108'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '100'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '32'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '33'
-      - kind: PUTCHAR
-      - kind: POP
-      - kind: CONST
-        args:
-          - '10'
-      - kind: PUTCHAR
-      - kind: RETURN
+functions:
+  _main:
+    ifId: 0
+    parameters: []
+    locals: {}
+    blocks:
+      _main:
+        - kind: CONST
+          args:
+            - '72'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '101'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '108'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '108'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '111'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '44'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '32'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '119'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '111'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '114'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '108'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '100'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '32'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '33'
+        - kind: PUTCHAR
+        - kind: POP
+        - kind: CONST
+          args:
+            - '10'
+        - kind: PUTCHAR
+        - kind: RETURN
+memory: >-
+  00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

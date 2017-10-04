@@ -1,21 +1,24 @@
-_main:
-  ifId: 0
-  parameters: []
-  locals: {}
-  blocks:
-    _main:
-      - kind: STACK_LOAD
-        args:
-          - a
-      - kind: CONST
-        args:
-          - '5'
-      - kind: ADD
-      - kind: STACK_STORE
-        args:
-          - a
-      - kind: POP
-      - kind: STACK_LOAD
-        args:
-          - a
-      - kind: RETURN
+functions:
+  _main:
+    ifId: 0
+    parameters: []
+    locals: {}
+    blocks:
+      _main:
+        - kind: STACK_LOAD
+          args:
+            - a
+        - kind: CONST
+          args:
+            - '5'
+        - kind: ADD
+        - kind: STACK_STORE
+          args:
+            - a
+        - kind: POP
+        - kind: STACK_LOAD
+          args:
+            - a
+        - kind: RETURN
+memory: >-
+  00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

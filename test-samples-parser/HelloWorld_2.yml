@@ -1,0 +1,39 @@
+kind: ProgramWithExpressions
+expressions:
+  - kind: NativeOperation
+    operation: PUTS
+    arguments:
+      - kind: ArrayLiteral
+        values:
+          - kind: Number
+            value: '72'
+          - kind: Number
+            value: '101'
+          - kind: Number
+            value: '108'
+          - kind: Number
+            value: '108'
+          - kind: Number
+            value: '111'
+          - kind: Number
+            value: '44'
+          - kind: Number
+            value: '32'
+          - kind: Number
+            value: '119'
+          - kind: Number
+            value: '111'
+          - kind: Number
+            value: '114'
+          - kind: Number
+            value: '108'
+          - kind: Number
+            value: '100'
+          - kind: Number
+            value: '32'
+          - kind: Number
+            value: '33'
+          - kind: Number
+            value: '10'
+      - kind: Number
+        value: '15'

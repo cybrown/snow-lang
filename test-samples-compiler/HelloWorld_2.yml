@@ -1,0 +1,17 @@
+functions:
+  _main:
+    ifId: 0
+    parameters: []
+    locals: {}
+    blocks:
+      _main:
+        - kind: CONST
+          args:
+            - 0
+        - kind: CONST
+          args:
+            - '15'
+        - kind: PUTS
+        - kind: RETURN
+memory: >-
+  48656c6c6f2c20776f726c6420210a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

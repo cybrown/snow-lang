@@ -1,22 +1,25 @@
-_main:
-  ifId: 0
-  parameters: []
-  locals: {}
-  blocks:
-    _main:
-      - kind: STACK_LOAD
-        args:
-          - a
-      - kind: STACK_LOAD
-        args:
-          - b
-      - kind: ADD
-      - kind: STACK_LOAD
-        args:
-          - c
-      - kind: STACK_LOAD
-        args:
-          - d
-      - kind: SUB
-      - kind: MUL
-      - kind: RETURN
+functions:
+  _main:
+    ifId: 0
+    parameters: []
+    locals: {}
+    blocks:
+      _main:
+        - kind: STACK_LOAD
+          args:
+            - a
+        - kind: STACK_LOAD
+          args:
+            - b
+        - kind: ADD
+        - kind: STACK_LOAD
+          args:
+            - c
+        - kind: STACK_LOAD
+          args:
+            - d
+        - kind: SUB
+        - kind: MUL
+        - kind: RETURN
+memory: >-
+  00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
