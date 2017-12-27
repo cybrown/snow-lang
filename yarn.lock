@@ -19,6 +19,10 @@ js-yaml@^3.10.0:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+lodash@^4.17.4:
+  version "4.17.4"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+
 parsimmon@^1.6.2:
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/parsimmon/-/parsimmon-1.6.2.tgz#28fbe6b8caa38ab89f52b77f8c7743563c7d9aff"
