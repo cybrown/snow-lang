@@ -10,76 +10,76 @@ value:
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '72'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '101'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '108'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '108'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '111'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '44'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '32'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '119'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '111'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '114'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '108'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '100'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '32'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '33'
           - kind: NativeOperation
             operation: PUTCHAR
             arguments:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '10'
       locals: []

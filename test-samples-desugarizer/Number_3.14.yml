@@ -7,6 +7,6 @@ value:
       body:
         kind: Expressions
         expressions:
-          - kind: Number
+          - kind: NumberLiteral
             value: '3.14'
       locals: []

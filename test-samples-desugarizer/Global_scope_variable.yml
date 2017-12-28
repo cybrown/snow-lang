@@ -13,7 +13,7 @@ value:
               kind: Identifier
               text: a
             right:
-              kind: Number
+              kind: NumberLiteral
               value: '42'
           - kind: Identifier
             text: a

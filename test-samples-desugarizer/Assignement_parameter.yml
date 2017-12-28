@@ -20,7 +20,7 @@ value:
                 kind: Identifier
                 text: bfg
               right:
-                kind: Number
+                kind: NumberLiteral
                 value: '5'
           - kind: Identifier
             text: bfg
@@ -36,6 +36,6 @@ value:
               kind: Identifier
               text: abc
             args:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '5'
       locals: []

@@ -19,7 +19,7 @@ value:
                 kind: Identifier
                 text: a
               right:
-                kind: Number
+                kind: NumberLiteral
                 value: '5'
           - kind: Identifier
             text: a

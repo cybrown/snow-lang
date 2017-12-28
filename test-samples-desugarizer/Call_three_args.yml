@@ -16,6 +16,6 @@ value:
                 text: b
               - kind: Identifier
                 text: c
-              - kind: Number
+              - kind: NumberLiteral
                 value: '314'
       locals: []

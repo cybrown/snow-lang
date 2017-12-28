@@ -14,7 +14,7 @@ value:
               kind: Identifier
               text: a
             right:
-              kind: Number
+              kind: NumberLiteral
               value: '6'
           - kind: Assignement
             operator: =
@@ -48,6 +48,6 @@ value:
               kind: Identifier
               text: abc
             args:
-              - kind: Number
+              - kind: NumberLiteral
                 value: '5'
       locals: []

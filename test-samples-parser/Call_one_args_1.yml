@@ -5,5 +5,5 @@ expressions:
       kind: Identifier
       text: a
     args:
-      - kind: Number
+      - kind: NumberLiteral
         value: '3'

@@ -7,10 +7,10 @@ expressions:
       - kind: Binary
         operator: +
         left:
-          kind: Number
+          kind: NumberLiteral
           value: '1'
         right:
-          kind: Number
+          kind: NumberLiteral
           value: '1'
       - kind: Identifier
         text: c

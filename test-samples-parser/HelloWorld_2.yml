@@ -5,35 +5,35 @@ expressions:
     arguments:
       - kind: ArrayLiteral
         values:
-          - kind: Number
+          - kind: NumberLiteral
             value: '72'
-          - kind: Number
+          - kind: NumberLiteral
             value: '101'
-          - kind: Number
+          - kind: NumberLiteral
             value: '108'
-          - kind: Number
+          - kind: NumberLiteral
             value: '108'
-          - kind: Number
+          - kind: NumberLiteral
             value: '111'
-          - kind: Number
+          - kind: NumberLiteral
             value: '44'
-          - kind: Number
+          - kind: NumberLiteral
             value: '32'
-          - kind: Number
+          - kind: NumberLiteral
             value: '119'
-          - kind: Number
+          - kind: NumberLiteral
             value: '111'
-          - kind: Number
+          - kind: NumberLiteral
             value: '114'
-          - kind: Number
+          - kind: NumberLiteral
             value: '108'
-          - kind: Number
+          - kind: NumberLiteral
             value: '100'
-          - kind: Number
+          - kind: NumberLiteral
             value: '32'
-          - kind: Number
+          - kind: NumberLiteral
             value: '33'
-          - kind: Number
+          - kind: NumberLiteral
             value: '10'
-      - kind: Number
+      - kind: NumberLiteral
         value: '15'

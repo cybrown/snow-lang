@@ -15,7 +15,7 @@ expressions:
             kind: Identifier
             text: a
           right:
-            kind: Number
+            kind: NumberLiteral
             value: '6'
         - kind: VarDeclaration
           name: b
@@ -40,5 +40,5 @@ expressions:
       kind: Identifier
       text: abc
     args:
-      - kind: Number
+      - kind: NumberLiteral
         value: '5'

@@ -19,7 +19,7 @@ expressions:
               kind: Identifier
               text: bfg
             right:
-              kind: Number
+              kind: NumberLiteral
               value: '5'
         - kind: Identifier
           text: bfg
@@ -28,5 +28,5 @@ expressions:
       kind: Identifier
       text: abc
     args:
-      - kind: Number
+      - kind: NumberLiteral
         value: '5'
