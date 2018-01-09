@@ -1,33 +1,65 @@
+import { Opcodes, VirtualMachine, Frame, BinaryInstruction, BinaryProgram } from "./model";
+
 const {compileAst} = require('./compile');
 const {parseProgram} = require('./parser');
 const {desugarize} = require('./desugarizer');
 
-function runInstruction(vm, opcodes) {
+function stackPop<T>(stack: T[]): T {
+    const value = stack.pop();
+    if (value === undefined) {
+        throw new Error('Stack underflow');
+    }
+    return value;
+}
+
+function instrArgString(instruction: BinaryInstruction, index: number) {
+    if (!instruction.args) {
+        throw new Error('No instruction arguments');
+    }
+    const value = instruction.args[index];
+    if (typeof value !== 'string') {
+        throw new Error('Instruction arg must be a string');
+    }
+    return value;
+}
+
+function instrArgNumber(instruction: BinaryInstruction, index: number) {
+    if (!instruction.args) {
+        throw new Error('No instruction arguments');
+    }
+    const value = Number(instruction.args[index]);
+    if (isNaN(value)) {
+        throw new Error('Instruction arg must be a number, got ' + instruction.args[index]);
+    }
+    return value;
+}
+
+function runInstruction(vm: VirtualMachine, opcodes: Opcodes) {
     const frame = currentFrame(vm);
     const instruction = opcodes[frame.func].blocks[frame.block][frame.index];
     //console.log(`RUN ${frame.func} / ${frame.block} / ${frame.index} : ${instruction.kind} ${(instruction.args || []).join(', ')}`);
     switch (instruction.kind) {
         case 'CONST':
-            frame.stack.push(Number(instruction.args[0]));
+            frame.stack.push(instrArgNumber(instruction, 0));
             frame.index++;
             break;
         case 'ADD':
-            frame.stack.push(frame.stack.pop() + frame.stack.pop());
+            frame.stack.push(stackPop(frame.stack) + stackPop(frame.stack));
             frame.index++;
             break;
         case 'MUL':
-            frame.stack.push(frame.stack.pop() * frame.stack.pop());
+            frame.stack.push(stackPop(frame.stack) * stackPop(frame.stack));
             frame.index++;
             break;
         case 'SUB': {
-            const a = frame.stack.pop();
-            const b = frame.stack.pop();
+            const a = stackPop(frame.stack);
+            const b = stackPop(frame.stack);
             frame.stack.push(b - a);
             frame.index++;
             break;
         }
         case 'STACK_LOAD': {
-            const name = instruction.args[0];
+            const name = instrArgString(instruction, 0);
             if (opcodes[frame.func].locals[name]) {
                 frame.stack.push(frame.locals[name]);
             } else if (opcodes[frame.func].parameters.indexOf(name) >= 0) {
@@ -42,7 +74,10 @@ function runInstruction(vm, opcodes) {
             break;
         }
         case 'STACK_STORE': {
-            const name = instruction.args[0];
+            const name = instrArgString(instruction, 0);
+            if (typeof name != 'string') {
+                throw new Error('Name is not a string');
+            }
             if (opcodes[frame.func].locals[name]) {
                 frame.locals[name] = frame.stack[frame.stack.length - 1];
             } else if (opcodes[frame.func].parameters.indexOf(name) >= 0) {
@@ -57,24 +92,24 @@ function runInstruction(vm, opcodes) {
             break;
         }
         case 'BRANCH_COND': {
-            const condition = frame.stack.pop();
-            const ifTrue = instruction.args[0];
-            const ifFalse = instruction.args[1];
+            const condition = stackPop(frame.stack);
+            const ifTrue = instrArgString(instruction, 0);
+            const ifFalse = instrArgString(instruction, 1);
             frame.index = 0;
             frame.block = condition ? ifTrue : ifFalse;
             break;
         }
         case 'BRANCH': {
             frame.index = 0;
-            frame.block = instruction.args[0];
+            frame.block = instrArgString(instruction, 0);
             break;
         }
         case 'CALL': {
             const oldFrame = frame;
-            const newFrame = createFrame(instruction.args[0], '_main');
+            const newFrame = createFrame(instrArgString(instruction, 0), '_main');
             vm.stackFrame.push(newFrame);
-            for (let i = 0; i < instruction.args[1]; i++) {
-                newFrame.stack.unshift(oldFrame.stack.pop());
+            for (let i = 0; i < instrArgNumber(instruction, 1); i++) {
+                newFrame.stack.unshift(stackPop(oldFrame.stack));
             }
             oldFrame.index++;
             break;
@@ -89,27 +124,27 @@ function runInstruction(vm, opcodes) {
             break;
         }
         case 'POP': {
-            frame.stack.pop();
+            stackPop(frame.stack);
             frame.index++;
             break;
         }
         case 'PUTCHAR': {
-            process.stdout.write(String.fromCharCode(frame.stack.pop()));
+            process.stdout.write(String.fromCharCode(stackPop(frame.stack)));
             frame.stack.push(0);
             frame.index++;
             break;
         }
         case 'PUTS': {
-            const length = frame.stack.pop();
-            const start = frame.stack.pop();
+            const length = stackPop(frame.stack);
+            const start = stackPop(frame.stack);
             process.stdout.write(Buffer.from(vm.memory, start, length));
             frame.index++;
             frame.stack.push(0);
             break;
         }
         case 'STORE': {
-            const value = frame.stack.pop();
-            const index = frame.stack.pop();
+            const value = stackPop(frame.stack);
+            const index = stackPop(frame.stack);
             const arr = new Uint8Array(vm.memory);
             arr[index] = value;
             frame.index++;
@@ -117,7 +152,7 @@ function runInstruction(vm, opcodes) {
             break;
         }
         case 'LOAD': {
-            const index = frame.stack.pop();
+            const index = stackPop(frame.stack);
             const arr = new Uint8Array(vm.memory);
             frame.stack.push(arr[index]);
             frame.index++;
@@ -128,21 +163,21 @@ function runInstruction(vm, opcodes) {
     }
 }
 
-function eval(source, globals = {}) {
+function evaluate(source: string, globals = {}) {
     return run(compileAst(desugarize(parseProgram(source))), globals);
 }
 
-function createFrame(func, block) {
+function createFrame(func: string, block: string): Frame {
     return {
         stack: [],
-        locals: [],
+        locals: {},
         index: 0,
         func,
         block
     };
 }
 
-function createVm(globals) {
+function createVm(globals: {[globalName: string]: number}): VirtualMachine {
     return {
         stackFrame: [createFrame('_main', '_main')],
         globals,
@@ -150,11 +185,11 @@ function createVm(globals) {
     };
 }
 
-function currentFrame(vm) {
+function currentFrame(vm: VirtualMachine) {
     return vm.stackFrame[vm.stackFrame.length - 1];
 }
 
-function run(binary, globals = {}) {
+function run(binary: BinaryProgram, globals = {}) {
     const vm = createVm(globals);
     const opcodes = binary.functions;
     const vmMemory = new Uint8Array(vm.memory);
@@ -177,5 +212,5 @@ function run(binary, globals = {}) {
     return currentFrame(vm).stack[currentFrame(vm).stack.length - 1];
 }
 
-module.exports.eval = eval;
+module.exports.eval = evaluate;
 module.exports.run = run;

@@ -1,8 +1,7 @@
-const {
+import {
     string,
     optWhitespace,
     seq,
-    seqObj,
     digit,
     digits,
     letters,
@@ -10,11 +9,12 @@ const {
     alt,
     sepBy,
     lazy,
-    noneOf
-} = require('parsimmon');
-const fs = require('fs');
-const {CreateBinaryLeft} = require('./util');
-const {groupBy, entries} = require('lodash');
+    noneOf,
+    Parser
+} from 'parsimmon';
+import * as fs from 'fs';
+import {groupBy, entries} from 'lodash';
+import { NativeOperationNode, VarDeclarationNode, ArrayLiteralNode, NumberLiteralNode, StringLiteralNode, FunctionNode, IfNode, AstNode, BinaryNode } from './ast-nodes';
 
 const _ = optWhitespace;
 
@@ -41,19 +41,24 @@ const BracesList = seq(
 
 const AssignementOperator = string('=').trim(_);
 
-const Block = seqObj(
+const Block = seq(
     string('{').trim(_),
-    ['expression', Expression],
+    Expression,
     string('}').trim(_)
-).map(node => node.expression);
+).map(node => node[1]);
 
-const IfExpression = seqObj(
+const IfExpression = seq(
     string('if').trim(_),
-    ['condition', Expression],
-    ['ifTrue', Block],
+    Expression,
+    Block,
     string('else').trim(_),
-    ['ifFalse', Block]
-).map(node => Object.assign({kind: 'If'}, node));
+    Block
+).map(node => <IfNode> {
+    kind: 'If',
+    condition: node[1],
+    ifTrue: node[2],
+    ifFalse: node[4]
+});
 
 const NumberLiteral = seq(
     digit,
@@ -62,10 +67,10 @@ const NumberLiteral = seq(
         string('.'),
         digits
     ).atMost(1).map(v => v[0] ? v[0].join('') : v[0])
-).trim(_).map(values => ({
+).trim(_).map(values => <NumberLiteralNode> {
     kind: 'NumberLiteral',
-    value: values.join('')
-}));
+    value: Number(values.join(''))
+});
 
 const Identifier = seq(
     letter,
@@ -75,20 +80,25 @@ const Identifier = seq(
     text: v.join('')
 }));
 
-const NativeOperation = seqObj(
+const NativeOperation = seq(
     string('#'),
-    ['operation', Identifier.map(i => i.text)],
+    Identifier.map(i => i.text),
     _,
-    ['arguments', ParenthesisList.map(p => p.value)],
+    ParenthesisList.map(p => p.value),
     _
-).map(node => Object.assign({
-    kind: 'NativeOperation'
-}, node));
+).map(node => <NativeOperationNode> {
+    kind: 'NativeOperation',
+    operation: node[1],
+    arguments: node[3]
+});
 
-const VarDeclaration = seqObj(
+const VarDeclaration = seq(
     string('var').trim(_),
-    ['name', Identifier.map(identifier => identifier.text)]
-).map(node => Object.assign({kind: 'VarDeclaration'}, node));
+    Identifier.map(identifier => identifier.text)
+).map(node => <VarDeclarationNode> {
+    kind: 'VarDeclaration',
+    name: node[1]
+});
 
 const Parenthesis = seq(
     string('('),
@@ -96,24 +106,26 @@ const Parenthesis = seq(
     string(')')
 ).trim(_).map(values => values[1]);
 
-const ArrayLiteral = seqObj(
+const ArrayLiteral = seq(
     string('['),
-    ['values', sepBy(NumberLiteral, string(',').trim(_))],
+    sepBy(NumberLiteral, string(',').trim(_)),
     string(']')
-).map(node => Object.assign({
+).map(node => <ArrayLiteralNode> {
     kind: 'ArrayLiteral',
-}, node));
+    values: node[1]
+});
 
-const StringLiteral = seqObj(
+const StringLiteral = seq(
     string('"'),
-    ['text', alt(
+    alt(
         noneOf('"\\'),
         string('\\n').map(v => '\n')
-    ).many().map(v => v.join(''))],
+    ).many().map(v => v.join('')),
     string('"')
-).map(node => Object.assign({
-    kind: 'StringLiteral'
-}, node));
+).map(node => <StringLiteralNode> {
+    kind: 'StringLiteral',
+    text: node[1]
+});
 
 const BaseExpression = alt(
     NativeOperation,
@@ -149,7 +161,7 @@ const Postfix = seq(
     }, first);
 });
 
-const binaryOperatorsList = [
+const binaryOperatorsList: [string, number][] = [
     ['+', 50],
     ['-', 50],
     ['*', 30],
@@ -176,20 +188,26 @@ const ExpressionsAndVarDeclarations = sepBy(
     expressions
 }) : expressions[0]);
 
-const ParameterList = sepBy(
-    Identifier.map(identifier => identifier.text),
-    string(',').trim(_)
-).wrap(
+const ParameterList = seq(
     string('(').trim(_),
+    sepBy(
+        Identifier.map(identifier => identifier.text),
+        string(',').trim(_)
+    ),
     string(')').trim(_)
-);
+).map(node => node[1]);
 
-const FunctionDefinition = seqObj(
+const FunctionDefinition = seq(
     string('fun').trim(_),
-    ['name', Identifier.map(identifier => identifier.text)],
-    ['parameters', ParameterList],
-    ['body', Block]
-).map(node => Object.assign({ kind: 'FunctionDefinition' }, node));
+    Identifier.map(identifier => identifier.text),
+    ParameterList,
+    Block
+).map(node => <FunctionNode> {
+    kind: 'FunctionDefinition',
+    name: node[1],
+    parameters: node[2],
+    body: node[3]
+});
 
 const ProgramWithExpressions = sepBy(
     alt(
@@ -203,5 +221,20 @@ const ProgramWithExpressions = sepBy(
     expressions
 }));
 
-module.exports.parseExpression = input => Expression.parse(input);
-module.exports.parseProgram = input => ProgramWithExpressions.parse(input);
+module.exports.parseExpression = (input: string) => Expression.parse(input);
+module.exports.parseProgram = (input: string) => ProgramWithExpressions.parse(input);
+
+function CreateBinaryLeft (kind: AstNode['kind'], nextParser: Parser<BinaryNode>, operator: Parser<string>) {
+    return seq(
+        nextParser,
+        seq(
+            operator.trim(_),
+            nextParser
+        ).trim(_).map(v => [v[0], v[1]]).many()
+    ).map(([first, rest]) => rest.reduce((acc, ch) => ({
+        kind: <any> kind,
+        operator: <string> ch[0],
+        left: <BinaryNode> acc,
+        right: <BinaryNode> ch[1]
+    }), <any> first));
+}

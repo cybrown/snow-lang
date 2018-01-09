@@ -1,6 +1,9 @@
+import { ProgramNode, FunctionNode, CallNode, BinaryNode, IdentifierNode, NumberLiteralNode, IfNode, AssignementNode, ExpressionsNode, NativeOperationNode, ArrayLiteralNode, AstNode } from "./ast-nodes";
+import { BinaryProgram, BinaryFunction, BinaryInstruction, InstructionKind } from "./model";
+
 const {parseExpression} = require('./parser');
 
-const opForOperator = {
+const opForOperator: {[operator: string]: InstructionKind} = {
     '+': 'ADD',
     '-': 'SUB',
     '*': 'MUL',
@@ -8,11 +11,33 @@ const opForOperator = {
     '%': 'MOD'
 };
 
-const allCompilers = {
-    Program(node, cb, ctx) {
+interface CompilationContext {
+    functions: {
+        [name: string]: BinaryFunction
+    };
+    currentFunction: BinaryFunction;
+    currentBlock: BinaryInstruction[];
+    initialMemory: ArrayBuffer;
+    currentMemoryOffset: number;
+}
+
+interface VisitorCollection {
+    [nodeName: string]: (node: AstNode, cb: VisitorCallback, ctx: CompilationContext) => void;
+}
+
+type VisitorCallback = (node: AstNode) => void;
+
+const allCompilers: VisitorCollection = {
+    Program(node: AstNode, cb: VisitorCallback, ctx: CompilationContext) {
+        if (node.kind !== 'Program') {
+            throw new Error('Expected Program');
+        }
         node.functions.forEach(func => cb(func));
     },
-    FunctionDefinition(node, cb, ctx) {
+    FunctionDefinition(node: AstNode, cb: VisitorCallback, ctx: CompilationContext) {
+        if (node.kind !== 'FunctionDefinition') {
+            throw new Error('Expected FunctionDefinition');
+        }
         ctx.functions[node.name] = {
             ifId: 0,
             parameters: node.parameters,
@@ -29,7 +54,10 @@ const allCompilers = {
             kind: 'RETURN'
         });
     },
-    Call(node, cb, ctx) {
+    Call(node: AstNode, cb: VisitorCallback, ctx: CompilationContext) {
+        if (node.kind !== 'Call') {
+            throw new Error('Expected Call');
+        }
         node.args.forEach(arg => {
             cb(arg);
         });
@@ -41,26 +69,38 @@ const allCompilers = {
             ]
         });
     },
-    Binary(node, cb, ctx) {
+    Binary(node: AstNode, cb: VisitorCallback, ctx: CompilationContext) {
+        if (node.kind !== 'Binary') {
+            throw new Error('Expected Binary');
+        }
         cb(node.left);
         cb(node.right);
         ctx.currentBlock.push({
             kind: opForOperator[node.operator]
         });
     },
-    Identifier(node, cb, ctx) {
+    Identifier(node: AstNode, cb: VisitorCallback, ctx: CompilationContext) {
+        if (node.kind !== 'Identifier') {
+            throw new Error('Expected Identifier');
+        }
         ctx.currentBlock.push({
             kind: 'STACK_LOAD',
             args: [node.text]
         })
     },
-    NumberLiteral(node, cb, ctx) {
+    NumberLiteral(node: AstNode, cb: VisitorCallback, ctx: CompilationContext) {
+        if (node.kind !== 'NumberLiteral') {
+            throw new Error('Expected NumberLiteral')
+        }
         ctx.currentBlock.push({
             kind: 'CONST',
             args: [node.value]
         })
     },
-    If(node, cb, ctx) {
+    If(node: AstNode, cb: VisitorCallback, ctx: CompilationContext) {
+        if (node.kind !== 'If') {
+            throw new Error('Expected If');
+        }
         cb(node.condition);
         const ifId = ctx.currentFunction.ifId++;
         ctx.currentBlock.push({
@@ -91,10 +131,13 @@ const allCompilers = {
         });
         ctx.currentBlock = ctx.currentFunction.blocks['ifEnd-' + ifId];
     },
-    Assignement(node, cb, ctx) {
+    Assignement(node: AstNode, cb: VisitorCallback, ctx: CompilationContext) {
+        if (node.kind !== 'Assignement') {
+            throw new Error('Expected Assignement');
+        }
         cb(node.right);
         if (node.left.kind !== 'Identifier') {
-            throw new Error('Only identifiers are supported on LHS of assignement');
+            throw new Error('Only identifiers supported on LHS of assignement');
         }
         ctx.currentBlock.push({
             kind: 'STACK_STORE',
@@ -103,7 +146,10 @@ const allCompilers = {
             ]
         });
     },
-    Expressions(node, cb, ctx) {
+    Expressions(node: AstNode, cb: VisitorCallback, ctx: CompilationContext) {
+        if (node.kind !== 'Expressions') {
+            throw new Error('Expected Expressions');
+        }
         node.expressions.forEach((expression, index) => {
             cb(expression);
             if (index < node.expressions.length - 1) {
@@ -113,7 +159,10 @@ const allCompilers = {
             }
         });
     },
-    NativeOperation(node, cb, ctx) {
+    NativeOperation(node: AstNode, cb: VisitorCallback, ctx: CompilationContext) {
+        if (node.kind !== 'NativeOperation') {
+            throw new Error('Expected NativeOperation');
+        }
         node.arguments.forEach(expression => {
             cb(expression);
         });
@@ -121,7 +170,10 @@ const allCompilers = {
             kind: node.operation
         });
     },
-    ArrayLiteral(node, cb, ctx) {
+    ArrayLiteral(node: AstNode, cb: VisitorCallback, ctx: CompilationContext) {
+        if (node.kind !== 'ArrayLiteral') {
+            throw new Error('Expected ArrayLiteral');
+        }
         const arr = new Uint8Array(ctx.initialMemory);
         const initialAddress = ctx.currentMemoryOffset;
         node.values.forEach(value => {
@@ -134,11 +186,11 @@ const allCompilers = {
     }
 };
 
-function compile(source) {
+function compile(source: string): BinaryProgram {
     return compileAst(parseExpression(source));
 }
 
-function compileNode(compilers, node, ctx) {
+function compileNode(compilers: VisitorCollection, node: AstNode, ctx: CompilationContext) {
     if (!compilers[node.kind]) {
         console.log('Compiler: Node kind not supported: ' + node.kind);
         return;
@@ -146,7 +198,7 @@ function compileNode(compilers, node, ctx) {
     compilers[node.kind](node, node => compileNode(compilers, node, ctx), ctx);
 }
 
-function compileAst(ast, initialMemorySize = 1024) {
+function compileAst(ast: {value: AstNode}, initialMemorySize = 1024) {
     const functions = {
         _main: {
             locals: {},

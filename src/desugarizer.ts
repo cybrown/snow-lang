@@ -1,13 +1,22 @@
-const identity = x => x;
+import { AstNode, ProgramNode, BaseNode, BinaryNode, CallNode, IfNode, AssignementNode, FunctionNode, IndexNode, NativeOperationNode, StringLiteralNode, VarDeclarationNode, ExpressionsAndVarDeclarationsNode, IdentifierNode, NumberLiteralNode, ArrayLiteralNode } from "./ast-nodes";
 
-const desugarizeTopLevelExpressionsFunctions = {
-    ProgramWithExpressions(node) {
-        return {
+function identity<T>(x: T): T {
+    return x;
+}
+
+const desugarizeTopLevelExpressionsFunctions: {
+    [name: string]: (node: AstNode) => AstNode
+} = {
+    ProgramWithExpressions(node: AstNode): ProgramNode {
+        if (node.kind !== 'ProgramWithExpressions') {
+            throw new Error('Program node was expected');
+        }
+        return <any> {
             kind: 'Program',
             functions: node.expressions
                 .filter(expression => expression.kind === 'FunctionDefinition')
                 .map(n => desugarizeTopLevelExpressions(n))
-                .concat({
+                .concat(<any> {
                     kind: 'FunctionDefinition',
                     name: '_main',
                     parameters: [],
@@ -34,7 +43,7 @@ const desugarizeTopLevelExpressionsFunctions = {
     StringLiteral: identity
 };
 
-function desugarizeTopLevelExpressions(node) {
+function desugarizeTopLevelExpressions(node: AstNode): AstNode {
     const func = desugarizeTopLevelExpressionsFunctions[node.kind];
     if (!func) {
         console.log('Warning: can not desugarize top level expressions for node: ' + node.kind);
@@ -44,30 +53,54 @@ function desugarizeTopLevelExpressions(node) {
     }
 }
 
-const desugarizeVarDeclarationsFunctions = {
-    Program: (node, ctx) => Object.assign({}, node, {
+interface Context {
+    currentFunction?: {
+        locals: VarDeclarationNode[];
+    };
+}
+
+type VisitorMember<T extends BaseNode> = (node: T, ctx: Context) => AstNode;
+
+interface Visitor {
+    Program: VisitorMember<ProgramNode>;
+    Binary: VisitorMember<BinaryNode>;
+    Call: VisitorMember<CallNode>;
+    Identifier: VisitorMember<IdentifierNode>;
+    If: VisitorMember<IfNode>;
+    NumberLiteral: VisitorMember<NumberLiteralNode>;
+    Assignement: VisitorMember<AssignementNode>;
+    FunctionDefinition: VisitorMember<FunctionNode>;
+    ExpressionsAndVarDeclarations: VisitorMember<ExpressionsAndVarDeclarationsNode>;
+    VarDeclaration: VisitorMember<VarDeclarationNode>;
+    Index: VisitorMember<IndexNode>;
+    NativeOperation: VisitorMember<NativeOperationNode>;
+    StringLiteral: VisitorMember<StringLiteralNode>;
+}
+
+const desugarizeVarDeclarationsFunctions: Visitor = {
+    Program: (node: ProgramNode, ctx: Context) => Object.assign({}, node, {
         functions: node.functions.map(n => desugarizeVarDeclarations(n, ctx))
     }),
-    Binary: (node, ctx) => Object.assign({}, node, {
+    Binary: (node: BinaryNode, ctx: Context) => Object.assign({}, node, {
         left: desugarizeVarDeclarations(node.left, ctx),
         right: desugarizeVarDeclarations(node.right, ctx)
     }),
-    Call: (node, ctx) => Object.assign({}, node, {
+    Call: (node: CallNode, ctx: Context) => Object.assign({}, node, {
         caller: desugarizeVarDeclarations(node.caller, ctx),
         args: node.args.map(n => desugarizeVarDeclarations(n, ctx))
     }),
     Identifier: identity,
-    If: (node, ctx) => Object.assign({}, node, {
+    If: (node: IfNode, ctx: Context) => Object.assign({}, node, {
         condition: desugarizeVarDeclarations(node.condition, ctx),
         ifTrue: desugarizeVarDeclarations(node.ifTrue, ctx),
         ifFalse: desugarizeVarDeclarations(node.ifFalse, ctx)
     }),
     NumberLiteral: identity,
-    Assignement: (node, ctx) => Object.assign({}, node, {
+    Assignement: (node: AssignementNode, ctx: Context) => Object.assign({}, node, {
         left: desugarizeVarDeclarations(node.left, ctx),
         right: desugarizeVarDeclarations(node.right, ctx)
     }),
-    FunctionDefinition: (node, ctx) => {
+    FunctionDefinition: (node: FunctionNode, ctx: Context) => {
         ctx.currentFunction = {
             locals: []
         };
@@ -76,7 +109,7 @@ const desugarizeVarDeclarationsFunctions = {
             locals: ctx.currentFunction.locals
         });
     },
-    ExpressionsAndVarDeclarations: (node, ctx) => {
+    ExpressionsAndVarDeclarations: (node: ExpressionsAndVarDeclarationsNode, ctx: Context) => {
         const expressions = node.expressions
             .map(n => desugarizeVarDeclarations(n, ctx))
             .filter(e => e.kind !== 'VarDeclaration')
@@ -85,28 +118,31 @@ const desugarizeVarDeclarationsFunctions = {
             expressions
         });
     },
-    VarDeclaration: (node, ctx) => {
+    VarDeclaration: (node: VarDeclarationNode, ctx: Context) => {
+        if (!ctx.currentFunction) {
+            throw new Error('No current function');
+        }
         ctx.currentFunction.locals.push(node);
         return node;
     },
-    Index: (node, ctx) => Object.assign({}, node, {
+    Index: (node: IndexNode, ctx: Context) => Object.assign({}, node, {
         expression: desugarizeVarDeclarations(node.expression, ctx),
         index: node.index.map(n => desugarizeVarDeclarations(n, ctx))
     }),
-    NativeOperation: (node, ctx) => Object.assign({}, node, {
+    NativeOperation: (node: NativeOperationNode, ctx: Context) => Object.assign({}, node, {
         arguments: node.arguments.map(n => desugarizeVarDeclarations(n, ctx))
     }),
-    StringLiteral: (node, ctx) => Object.assign({}, {
+    StringLiteral: (node: StringLiteralNode, ctx: Context) => <ArrayLiteralNode> Object.assign({}, {
         kind: 'ArrayLiteral',
-        values: [{kind: 'NumberLiteral', value: String(node.text.length)}, ...node.text.split('').map(c => ({
+        values: [{kind: 'NumberLiteral', value: node.text.length}, ...node.text.split('').map(c => ({
             kind: 'NumberLiteral',
-            value: String(c.charCodeAt(0))
+            value: c.charCodeAt(0)
         }))]
     })
 };
 
-function desugarizeVarDeclarations(node, ctx) {
-    const func = desugarizeVarDeclarationsFunctions[node.kind];
+function desugarizeVarDeclarations(node: AstNode, ctx: Context) {
+    const func = (<any> desugarizeVarDeclarationsFunctions)[node.kind];
     if (!func) {
         console.log('Warning: can not desugarize var declarations for node: ' + node.kind);
         return node;
@@ -115,11 +151,9 @@ function desugarizeVarDeclarations(node, ctx) {
     }
 }
 
-function desugarize(ast) {
-    const ctx = {};
+export function desugarize(ast: {value: AstNode}) {
+    const ctx: Context = {};
     return Object.assign({}, ast, {
-        value: desugarizeVarDeclarations(desugarizeTopLevelExpressions(ast.value, ctx), ctx)
+        value: desugarizeVarDeclarations(desugarizeTopLevelExpressions(ast.value), ctx)
     });
 }
-
-module.exports.desugarize = desugarize;
