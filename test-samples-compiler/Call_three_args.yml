@@ -13,7 +13,7 @@ functions:
             - c
         - kind: CONST
           args:
-            - '314'
+            - 314
         - kind: CALL
           args:
             - a

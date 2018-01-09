@@ -7,77 +7,77 @@ functions:
       _main:
         - kind: CONST
           args:
-            - '72'
+            - 72
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '101'
+            - 101
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '108'
+            - 108
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '108'
+            - 108
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '111'
+            - 111
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '44'
+            - 44
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '32'
+            - 32
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '119'
+            - 119
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '111'
+            - 111
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '114'
+            - 114
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '108'
+            - 108
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '100'
+            - 100
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '32'
+            - 32
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '33'
+            - 33
         - kind: PUTCHAR
         - kind: POP
         - kind: CONST
           args:
-            - '10'
+            - 10
         - kind: PUTCHAR
         - kind: RETURN
 memory: >-

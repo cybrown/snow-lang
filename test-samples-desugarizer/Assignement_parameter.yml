@@ -21,7 +21,7 @@ value:
                 text: bfg
               right:
                 kind: NumberLiteral
-                value: '5'
+                value: 5
           - kind: Identifier
             text: bfg
       locals: []
@@ -37,5 +37,5 @@ value:
               text: abc
             args:
               - kind: NumberLiteral
-                value: '5'
+                value: 5
       locals: []

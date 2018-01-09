@@ -15,7 +15,7 @@ expressions:
             text: str
           right:
             kind: NumberLiteral
-            value: '1'
+            value: 1
         - kind: NativeOperation
           operation: LOAD
           arguments:

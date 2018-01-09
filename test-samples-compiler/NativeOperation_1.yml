@@ -7,13 +7,13 @@ functions:
       _main:
         - kind: CONST
           args:
-            - '2'
+            - 2
         - kind: CONST
           args:
-            - '4'
+            - 4
         - kind: CONST
           args:
-            - '8'
+            - 8
         - kind: MUL
         - kind: ADD
         - kind: RETURN

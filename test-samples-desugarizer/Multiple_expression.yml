@@ -13,10 +13,10 @@ value:
             operator: +
             left:
               kind: NumberLiteral
-              value: '1'
+              value: 1
             right:
               kind: NumberLiteral
-              value: '1'
+              value: 1
           - kind: Identifier
             text: c
           - kind: Identifier

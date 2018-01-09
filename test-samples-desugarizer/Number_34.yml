@@ -8,5 +8,5 @@ value:
         kind: Expressions
         expressions:
           - kind: NumberLiteral
-            value: '34'
+            value: 34
       locals: []

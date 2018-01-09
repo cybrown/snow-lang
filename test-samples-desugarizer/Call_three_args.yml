@@ -17,5 +17,5 @@ value:
               - kind: Identifier
                 text: c
               - kind: NumberLiteral
-                value: '314'
+                value: 314
       locals: []

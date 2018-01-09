@@ -7,7 +7,7 @@ functions:
       _main:
         - kind: CONST
           args:
-            - '3'
+            - 3
         - kind: CALL
           args:
             - a

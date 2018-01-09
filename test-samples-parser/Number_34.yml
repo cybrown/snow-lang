@@ -1,4 +1,4 @@
 kind: ProgramWithExpressions
 expressions:
   - kind: NumberLiteral
-    value: '34'
+    value: 34

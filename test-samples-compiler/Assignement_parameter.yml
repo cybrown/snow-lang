@@ -7,7 +7,7 @@ functions:
       _main:
         - kind: CONST
           args:
-            - '5'
+            - 5
         - kind: CALL
           args:
             - abc
@@ -25,7 +25,7 @@ functions:
             - bfg
         - kind: CONST
           args:
-            - '5'
+            - 5
         - kind: ADD
         - kind: STACK_STORE
           args:

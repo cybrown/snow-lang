@@ -10,7 +10,7 @@ functions:
             - 0
         - kind: CONST
           args:
-            - '15'
+            - 15
         - kind: PUTS
         - kind: RETURN
 memory: >-

@@ -6,4 +6,4 @@ expressions:
       text: a
     args:
       - kind: NumberLiteral
-        value: '3'
+        value: 3

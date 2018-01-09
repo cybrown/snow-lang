@@ -20,7 +20,7 @@ value:
                 text: a
               right:
                 kind: NumberLiteral
-                value: '5'
+                value: 5
           - kind: Identifier
             text: a
       locals: []

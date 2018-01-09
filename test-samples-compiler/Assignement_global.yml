@@ -10,7 +10,7 @@ functions:
             - a
         - kind: CONST
           args:
-            - '5'
+            - 5
         - kind: ADD
         - kind: STACK_STORE
           args:

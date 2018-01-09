@@ -25,7 +25,7 @@ functions:
             - str
         - kind: CONST
           args:
-            - '1'
+            - 1
         - kind: ADD
         - kind: STACK_LOAD
           args:

@@ -16,7 +16,7 @@ expressions:
             text: a
           right:
             kind: NumberLiteral
-            value: '6'
+            value: 6
         - kind: VarDeclaration
           name: b
         - kind: Assignement
@@ -41,4 +41,4 @@ expressions:
       text: abc
     args:
       - kind: NumberLiteral
-        value: '5'
+        value: 5

@@ -14,7 +14,7 @@ value:
               text: a
             right:
               kind: NumberLiteral
-              value: '42'
+              value: 42
           - kind: Identifier
             text: a
       locals:

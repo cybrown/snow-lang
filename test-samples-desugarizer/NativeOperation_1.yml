@@ -11,12 +11,12 @@ value:
             operation: ADD
             arguments:
               - kind: NumberLiteral
-                value: '2'
+                value: 2
               - kind: NativeOperation
                 operation: MUL
                 arguments:
                   - kind: NumberLiteral
-                    value: '4'
+                    value: 4
                   - kind: NumberLiteral
-                    value: '8'
+                    value: 8
       locals: []
