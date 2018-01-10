@@ -1,5 +1,5 @@
 const assert = require('assert');
-const {eval} = require('./lib/run');
+const {evaluate} = require('./lib/run');
 
 let mismatch = 0;
 let total = 0;
@@ -69,7 +69,7 @@ verify(34, '#ADD(2, #MUL(4, 8))');
 function verify(actual, expr, globals) {
     total++;
     try {
-        assert.equal(actual, eval(expr, globals));
+        assert.equal(actual, evaluate(expr, globals));
     } catch (err) {
         if (err) {
             console.log('MISMATCH:', err.message);

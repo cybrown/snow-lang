@@ -14,7 +14,7 @@ import {
 } from 'parsimmon';
 import * as fs from 'fs';
 import {groupBy, entries} from 'lodash';
-import { NativeOperationNode, VarDeclarationNode, ArrayLiteralNode, NumberLiteralNode, StringLiteralNode, FunctionNode, IfNode, AstNode, BinaryNode } from './ast-nodes';
+import { NativeOperationNode, VarDeclarationNode, ArrayLiteralNode, NumberLiteralNode, StringLiteralNode, FunctionNode, IfNode, AstNode, BinaryNode, ProgramWithExpressionsNode } from './ast-nodes';
 
 const _ = optWhitespace;
 
@@ -216,13 +216,13 @@ const ProgramWithExpressions = sepBy(
         UniqueExpression
     ),
     string(';').trim(_)
-).map(expressions => ({
+).map(expressions => <ProgramWithExpressionsNode> {
     kind: 'ProgramWithExpressions',
     expressions
-}));
+});
 
-module.exports.parseExpression = (input: string) => Expression.parse(input);
-module.exports.parseProgram = (input: string) => ProgramWithExpressions.parse(input);
+export const parseExpression = (input: string) => Expression.parse(input);
+export const parseProgram = (input: string) => ProgramWithExpressions.parse(input);
 
 function CreateBinaryLeft (kind: AstNode['kind'], nextParser: Parser<BinaryNode>, operator: Parser<string>) {
     return seq(
@@ -234,7 +234,7 @@ function CreateBinaryLeft (kind: AstNode['kind'], nextParser: Parser<BinaryNode>
     ).map(([first, rest]) => rest.reduce((acc, ch) => ({
         kind: <any> kind,
         operator: <string> ch[0],
-        left: <BinaryNode> acc,
-        right: <BinaryNode> ch[1]
-    }), <any> first));
+        left: <AstNode> acc,
+        right: <AstNode> ch[1]
+    }), first));
 }

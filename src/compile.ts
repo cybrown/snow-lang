@@ -190,7 +190,7 @@ function compile(source: string): BinaryProgram {
     return compileAst(parseExpression(source));
 }
 
-function compileNode(compilers: VisitorCollection, node: AstNode, ctx: CompilationContext) {
+export function compileNode(compilers: VisitorCollection, node: AstNode, ctx: CompilationContext) {
     if (!compilers[node.kind]) {
         console.log('Compiler: Node kind not supported: ' + node.kind);
         return;
@@ -198,7 +198,7 @@ function compileNode(compilers: VisitorCollection, node: AstNode, ctx: Compilati
     compilers[node.kind](node, node => compileNode(compilers, node, ctx), ctx);
 }
 
-function compileAst(ast: {value: AstNode}, initialMemorySize = 1024) {
+export function compileAst(ast: {value: AstNode}, initialMemorySize = 1024) {
     const functions = {
         _main: {
             locals: {},
@@ -222,6 +222,3 @@ function compileAst(ast: {value: AstNode}, initialMemorySize = 1024) {
         memory: ctx.initialMemory
     };
 }
-
-module.exports.compile = compile;
-module.exports.compileAst = compileAst;

@@ -1,8 +1,8 @@
 import { Opcodes, VirtualMachine, Frame, BinaryInstruction, BinaryProgram } from "./model";
 
-const {compileAst} = require('./compile');
-const {parseProgram} = require('./parser');
-const {desugarize} = require('./desugarizer');
+import { compileAst } from './compile';
+import { parseProgram } from './parser';
+import { desugarize } from './desugarizer';
 
 function stackPop<T>(stack: T[]): T {
     const value = stack.pop();
@@ -163,8 +163,12 @@ function runInstruction(vm: VirtualMachine, opcodes: Opcodes) {
     }
 }
 
-function evaluate(source: string, globals = {}) {
-    return run(compileAst(desugarize(parseProgram(source))), globals);
+export function evaluate(source: string, globals = {}) {
+    const parserResult = parseProgram(source);
+    if (parserResult.status === false) {
+        throw new Error('Failed to parse');
+    }
+    return run(compileAst(desugarize(parserResult)), globals);
 }
 
 function createFrame(func: string, block: string): Frame {
@@ -189,7 +193,7 @@ function currentFrame(vm: VirtualMachine) {
     return vm.stackFrame[vm.stackFrame.length - 1];
 }
 
-function run(binary: BinaryProgram, globals = {}) {
+export function run(binary: BinaryProgram, globals = {}) {
     const vm = createVm(globals);
     const opcodes = binary.functions;
     const vmMemory = new Uint8Array(vm.memory);
@@ -211,6 +215,3 @@ function run(binary: BinaryProgram, globals = {}) {
     }
     return currentFrame(vm).stack[currentFrame(vm).stack.length - 1];
 }
-
-module.exports.eval = evaluate;
-module.exports.run = run;

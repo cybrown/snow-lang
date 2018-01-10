@@ -11,12 +11,12 @@ const desugarizeTopLevelExpressionsFunctions: {
         if (node.kind !== 'ProgramWithExpressions') {
             throw new Error('Program node was expected');
         }
-        return <any> {
+        return {
             kind: 'Program',
             functions: node.expressions
                 .filter(expression => expression.kind === 'FunctionDefinition')
-                .map(n => desugarizeTopLevelExpressions(n))
-                .concat(<any> {
+                .map(n => <FunctionNode> desugarizeTopLevelExpressions(n))
+                .concat({
                     kind: 'FunctionDefinition',
                     name: '_main',
                     parameters: [],

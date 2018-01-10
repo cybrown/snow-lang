@@ -13,7 +13,7 @@ export interface FunctionNode extends BaseNode {
     kind: 'FunctionDefinition';
     name: string;
     parameters: string[];
-    locals: LocalNode[];
+    locals?: LocalNode[];
     body: AstNode;
 }
 
@@ -98,27 +98,30 @@ export interface ExpressionsAndVarDeclarationsNode extends BaseNode {
     expressions: AstNode[];
 }
 
-interface ProgramWithExpressionsNode extends BaseNode {
+export interface ProgramWithExpressionsNode extends BaseNode {
     kind: 'ProgramWithExpressions';
-    expressions: AstNode[];
+    expressions: (ExpressionNode | FunctionNode)[];
 }
+
+export type ExpressionNode = CallNode
+                           | BinaryNode
+                           | IdentifierNode
+                           | NumberLiteralNode
+                           | IfNode
+                           | AssignementNode
+                           | ExpressionsNode
+                           | NativeOperationNode
+                           | ArrayLiteralNode
+                           | IndexNode
+                           | StringLiteralNode
+                           ;
 
 export type AstNode = ProgramNode
                     | FunctionNode
                     | LocalNode
                     | ParameterNode
-                    | CallNode
-                    | BinaryNode
-                    | IdentifierNode
-                    | NumberLiteralNode
-                    | IfNode
-                    | AssignementNode
-                    | ExpressionsNode
-                    | NativeOperationNode
-                    | ArrayLiteralNode
-                    | IndexNode
-                    | StringLiteralNode
                     | VarDeclarationNode
                     | ExpressionsAndVarDeclarationsNode
                     | ProgramWithExpressionsNode
+                    | ExpressionNode
                     ;
